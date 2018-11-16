@@ -9,10 +9,12 @@
 import UIKit
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var viewController = ViewController()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -49,8 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
         if let custom = userInfo["custom"] as? [String: Any] {
-            if let bookingId = custom["bookingId"] as? String {
-                print(bookingId)
+            if let content = custom["content"] as? String {
+//                print(content)
+                contentString = content
             }
         }
 
@@ -90,4 +93,5 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.badge, .sound, .alert])
     }
 }
+
 
